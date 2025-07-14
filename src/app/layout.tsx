@@ -7,6 +7,8 @@ import { cn } from 'shared/lib';
 
 import 'app/styles/global.css';
 
+import { Header } from 'widgets';
+
 const urbanist = Urbanist({
   subsets: ['latin'],
   variable: '--font-urbanist',
@@ -14,9 +16,8 @@ const urbanist = Urbanist({
 });
 
 export const metadata: Metadata = {
-  title: 'Lumitech | Next.js Template',
-  description:
-    "This Next.js template provides a ready-to-use setup for building fast, scalable web apps. It's recommended for all web projects, even if SEO isn't a priority, as Next.js offers many valuable built-in tools.",
+  title: 'Spice AI | LLM Leaderboard',
+  description: 'Spice AI | LLM Leaderboard',
 };
 
 type Props = {
@@ -26,7 +27,8 @@ type Props = {
 const RootLayout = ({ children }: Props) => {
   return (
     <html lang="en">
-      <body className={cn('bg-white text-gray-600', urbanist.className)}>
+      <body className={cn('', urbanist.className)}>
+        <Header />
         {children}
       </body>
     </html>
