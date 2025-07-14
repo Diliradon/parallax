@@ -9,6 +9,8 @@ const config: Config = {
     extend: {
       fontFamily: {
         urbanist: ['var(--font-urbanist)', 'sans-serif'],
+        inter: ['var(--font-inter)', 'sans-serif'],
+        'clash-grotesk': ['var(--font-clash-grotesk)', 'sans-serif'],
       },
     },
   },
