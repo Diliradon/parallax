@@ -2,11 +2,11 @@
 
 import Image from 'next/image';
 
-import { ClientsSection } from 'pages/clients-section';
-import { CrowdsourcingSection } from 'pages/crowdsourcing-section';
-import { HeroSection } from 'pages/hero-section';
-import { LeaderboardSection } from 'pages/leaderboard-section';
-import { MoonSection } from 'pages/moon-section';
+import { ClientsSection } from 'page-sections/clients-section';
+import { CrowdsourcingSection } from 'page-sections/crowdsourcing-section';
+import { HeroSection } from 'page-sections/hero-section';
+import { LeaderboardSection } from 'page-sections/leaderboard-section';
+import { MoonSection } from 'page-sections/moon-section';
 
 const HomePage = () => {
   return (

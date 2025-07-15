@@ -336,7 +336,7 @@ export const LeaderboardSection = () => {
             alt="fire"
             width={20}
             height={20}
-            className="object-cover"
+            className="animate-pulse rounded-t-full object-cover"
             priority
           />
         </div>

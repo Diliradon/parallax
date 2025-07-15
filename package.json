@@ -32,7 +32,7 @@
     "gsap": "^3.13.0",
     "next": "latest",
     "plx": "^0.0.1",
-    "react": "^19.1.0",
+    "react": "18.2.0",
     "react-dom": "18.2.0",
     "tailwind-merge": "^2.2.1",
     "three": "^0.178.0"

@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-import { Badge } from 'pages/hero-section/ui';
+import { Badge } from 'page-sections/hero-section/ui';
+
 import { BlurText, Button, CountUp, ShinyText } from 'shared/ui';
 
 export const HeroSection = () => {
