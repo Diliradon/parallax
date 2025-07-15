@@ -195,6 +195,7 @@ export const LeaderboardSection = () => {
   return (
     <section
       ref={sectionRef}
+      id="leaderboard"
       className="relative space-y-8 overflow-hidden px-4 py-10 md:px-10 lg:px-20"
     >
       <div className="mb-6 flex flex-col items-center justify-between gap-6 md:flex-row">

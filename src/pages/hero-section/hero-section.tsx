@@ -31,7 +31,10 @@ export const HeroSection = () => {
   }, []);
 
   return (
-    <section className="mx-auto mt-[100px] flex flex-col items-start justify-center gap-[36px] px-4 md:px-10 lg:px-20">
+    <section
+      id="home"
+      className="mx-auto mt-[100px] flex flex-col items-start justify-center gap-[36px] px-4 md:px-10 lg:px-20"
+    >
       <BlurText
         text="A new economic primitive for funding decentralized AI"
         className="bg-gradient-to-r from-[#B53EA4] via-[#FC6F32] to-[#FF4A] bg-clip-text font-clash-grotesk text-[32px] font-medium leading-[120%] tracking-[0%] text-transparent sm:text-[48px] md:text-[64px] lg:text-[96px] xl:text-[128px]"

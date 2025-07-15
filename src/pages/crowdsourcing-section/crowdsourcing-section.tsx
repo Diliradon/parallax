@@ -22,6 +22,7 @@ export const CrowdsourcingSection = () => {
   return (
     <section
       ref={sectionRef}
+      id="about"
       className="mb-30 relative mt-[100px] overflow-hidden px-4 md:mb-[500px] md:px-10 lg:mb-[700px] lg:px-20"
     >
       <motion.div style={{ x, y, scale }} className="absolute inset-0 z-[-1]">

@@ -7,7 +7,7 @@ import { cn } from 'shared/lib';
 
 import 'app/styles/global.css';
 
-import { Header } from 'widgets';
+import { Footer, Header } from 'widgets';
 
 const urbanist = Urbanist({
   subsets: ['latin'],
@@ -30,6 +30,7 @@ const RootLayout = ({ children }: Props) => {
       <body className={cn('', urbanist.className)}>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
