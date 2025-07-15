@@ -317,7 +317,7 @@ export const LeaderboardSection = () => {
       {/* Parallax Rocket */}
       {isInView && (
         <div
-          className="absolute left-[22%] -z-10 flex w-fit flex-col items-center justify-center transition-transform duration-100 ease-out"
+          className="absolute left-[24%] -z-10 flex w-fit flex-col items-center justify-center transition-transform duration-100 ease-out md:left-[22%]"
           style={{
             top: `${rocketPosition}%`,
             transform: `translateY(-50%)`,

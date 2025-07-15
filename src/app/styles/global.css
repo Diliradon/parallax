@@ -20,4 +20,9 @@
     /* Set Inter as default font family */
     font-family: var(--font-inter);
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
 }
