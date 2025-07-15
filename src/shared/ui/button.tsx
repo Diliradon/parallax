@@ -15,7 +15,7 @@ export const Button = ({
       )}
       {...props}
     >
-      <span className="inline-flex h-full w-full items-center justify-center rounded-full bg-black px-6 py-4 text-[18px] text-white transition-colors hover:bg-gray-900">
+      <span className="inline-flex h-full w-full items-center justify-center rounded-full bg-black px-6 py-4 text-[18px] text-white transition-colors hover:bg-gray-900/50">
         {props.children}
       </span>
     </button>

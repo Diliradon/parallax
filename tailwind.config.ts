@@ -3,7 +3,7 @@ import plugin from 'tailwindcss/plugin';
 
 const config: Config = {
   content: ['./src/**/*.{ts,tsx}'],
-  darkMode: "class",
+  darkMode: 'class',
   future: { hoverOnlyWhenSupported: true },
   theme: {
     extend: {
@@ -11,6 +11,15 @@ const config: Config = {
         urbanist: ['var(--font-urbanist)', 'sans-serif'],
         inter: ['var(--font-inter)', 'sans-serif'],
         'clash-grotesk': ['var(--font-clash-grotesk)', 'sans-serif'],
+      },
+      keyframes: {
+        shine: {
+          '0%': { 'background-position': '100%' },
+          '100%': { 'background-position': '-100%' },
+        },
+      },
+      animation: {
+        shine: 'shine 1s linear infinite',
       },
     },
   },
