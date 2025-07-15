@@ -29,7 +29,8 @@
     "clsx": "^2.1.0",
     "framer-motion": "^12.23.5",
     "next": "latest",
-    "react": "18.2.0",
+    "plx": "^0.0.1",
+    "react": "^19.1.0",
     "react-dom": "18.2.0",
     "tailwind-merge": "^2.2.1"
   },

@@ -1,9 +1,35 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
+
 import { Badge } from 'pages/hero-section/ui';
 import { BlurText, Button, CountUp, ShinyText } from 'shared/ui';
 
 export const HeroSection = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const badgesRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    if (badgesRef.current) {
+      observer.observe(badgesRef.current);
+    }
+
+    return () => {
+      if (badgesRef.current) {
+        observer.unobserve(badgesRef.current);
+      }
+    };
+  }, []);
+
   return (
     <section className="mx-auto mt-[100px] flex flex-col items-start justify-center gap-[36px] px-4">
       <BlurText
@@ -17,7 +43,12 @@ export const HeroSection = () => {
       />
       <Button className="w-full md:max-w-[240px]">Buy Spice AI</Button>
 
-      <div className="grid w-full grid-cols-1 gap-[34px] sm:grid-cols-2 md:grid-cols-3">
+      <div
+        ref={badgesRef}
+        className={`mt-[100px] grid w-full grid-cols-1 gap-[34px] transition-all duration-1000 ease-out sm:grid-cols-2 md:grid-cols-3 ${
+          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+        }`}
+      >
         <Badge
           title="LLM models"
           value={
@@ -25,7 +56,7 @@ export const HeroSection = () => {
               to={10873}
               from={0}
               direction="up"
-              delay={0}
+              delay={0.5}
               duration={2}
               startWhen
               className=""
@@ -43,7 +74,7 @@ export const HeroSection = () => {
               to={6557}
               from={0}
               direction="up"
-              delay={0}
+              delay={0.5}
               duration={2}
               startWhen
               className=""
