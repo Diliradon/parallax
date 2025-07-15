@@ -10,7 +10,7 @@ import { MoonSection } from 'pages/moon-section';
 
 const HomePage = () => {
   return (
-    <main className="">
+    <main className="overflow-x-hidden">
       <Image
         src="/images/earth-bg.svg"
         alt="earth"

@@ -1,37 +1,81 @@
 'use client';
 
 /* eslint-disable no-magic-numbers */
-import { useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import { Button } from 'shared/ui';
 
 export const CrowdsourcingSection = () => {
-  const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['0 1', '1 0'],
-  });
-  const x = useTransform(scrollYProgress, [0, 1], ['-150%', '150%']);
-  const y = useTransform(scrollYProgress, [0, 1], ['-32%', '32%']);
-  const scale = useTransform(scrollYProgress, [0, 1], [0.7, 1.3]);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [cometX, setCometX] = useState('-150%');
+  const [cometY, setCometY] = useState('-150%');
+  const [cometScale, setCometScale] = useState(0.7);
+  const [isInView, setIsInView] = useState(false);
+
+  const handleParallax = useCallback(() => {
+    if (!sectionRef.current || !isInView) {
+      return;
+    }
+    const rect = sectionRef.current.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const sectionHeight = rect.height;
+    const scrollProgress = Math.max(
+      0,
+      Math.min(
+        1,
+        (-rect.top + windowHeight * 0.2) / (sectionHeight + windowHeight * 0.4),
+      ),
+    );
+
+    setCometX(`${-150 + scrollProgress * 300}%`);
+    setCometY(`${-150 + scrollProgress * 300 * 2}%`);
+    setCometScale(0.7 + scrollProgress * 0.6);
+  }, [isInView]);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleParallax);
+
+    return () => window.removeEventListener('scroll', handleParallax);
+  }, [handleParallax]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.1, rootMargin: '0px 0px 300px 0px' },
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section
       ref={sectionRef}
       id="about"
-      className="mb-30 relative mt-[100px] overflow-hidden px-4 md:mb-[500px] md:px-10 lg:mb-[700px] lg:px-20"
+      className="relative my-[100px] px-4 md:px-10 lg:px-20"
     >
-      <motion.div style={{ x, y, scale }} className="absolute inset-0 z-[-1]">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isInView ? 1 : 0 }}
+        transition={{ duration: 0.5 }}
+        style={{ x: cometX, y: cometY, scale: cometScale }}
+        className="absolute inset-0 top-[50%] z-[-1] rotate-12"
+      >
         <Image
           src="/images/comet.svg"
           alt="comet"
           width={1000}
           height={1000}
-          className="max-w-[40%] rotate-12 opacity-90 md:max-w-[30%]"
+          className="max-w-[40%] rotate-[deg] opacity-90 md:max-w-[30%]"
         />
       </motion.div>
       <div className="relative z-10 flex flex-col items-start justify-center gap-8">
