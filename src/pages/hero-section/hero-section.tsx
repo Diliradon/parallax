@@ -1,8 +1,7 @@
 'use client';
 
-import { Badge } from 'pages/ui';
-import { CountUp } from 'pages/ui/count-up';
-import { BlurText, Button, ShinyText } from 'shared/ui';
+import { Badge } from 'pages/hero-section/ui';
+import { BlurText, Button, CountUp, ShinyText } from 'shared/ui';
 
 export const HeroSection = () => {
   return (
