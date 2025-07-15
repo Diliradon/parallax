@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@react-spring/web": "^10.0.1",
+    "@types/three": "^0.178.1",
     "clsx": "^2.1.0",
     "framer-motion": "^12.23.5",
     "gsap": "^3.13.0",
@@ -33,7 +34,8 @@
     "plx": "^0.0.1",
     "react": "^19.1.0",
     "react-dom": "18.2.0",
-    "tailwind-merge": "^2.2.1"
+    "tailwind-merge": "^2.2.1",
+    "three": "^0.178.0"
   },
   "engines": {
     "node": ">=18"

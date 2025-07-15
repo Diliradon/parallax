@@ -6,6 +6,7 @@ import { ClientsSection } from 'pages/clients-section';
 import { CrowdsourcingSection } from 'pages/crowdsourcing-section';
 import { HeroSection } from 'pages/hero-section';
 import { LeaderboardSection } from 'pages/leaderboard-section';
+import { MoonSection } from 'pages/moon-section';
 
 const HomePage = () => {
   return (
@@ -22,6 +23,7 @@ const HomePage = () => {
       <CrowdsourcingSection />
       <LeaderboardSection />
       <ClientsSection />
+      <MoonSection />
     </main>
   );
 };
