@@ -195,7 +195,7 @@ export const LeaderboardSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative space-y-8 overflow-hidden py-10"
+      className="relative space-y-8 overflow-hidden px-4 py-10 md:px-10 lg:px-20"
     >
       <div className="mb-6 flex flex-col items-center justify-between gap-6 md:flex-row">
         <h2 className="text-center text-3xl font-bold text-white">
@@ -316,7 +316,7 @@ export const LeaderboardSection = () => {
       {/* Parallax Rocket */}
       {isInView && (
         <div
-          className="absolute left-[200px] z-10 flex w-fit flex-col items-center justify-center transition-transform duration-100 ease-out"
+          className="absolute left-[22%] -z-10 flex w-fit flex-col items-center justify-center transition-transform duration-100 ease-out"
           style={{
             top: `${rocketPosition}%`,
             transform: `translateY(-50%)`,

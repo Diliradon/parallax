@@ -28,6 +28,7 @@
     "@react-spring/web": "^10.0.1",
     "clsx": "^2.1.0",
     "framer-motion": "^12.23.5",
+    "gsap": "^3.13.0",
     "next": "latest",
     "plx": "^0.0.1",
     "react": "^19.1.0",

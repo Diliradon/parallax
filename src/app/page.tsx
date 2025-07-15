@@ -2,13 +2,14 @@
 
 import Image from 'next/image';
 
+import { ClientsSection } from 'pages/clients-section';
 import { CrowdsourcingSection } from 'pages/crowdsourcing-section';
 import { HeroSection } from 'pages/hero-section';
 import { LeaderboardSection } from 'pages/leaderboard-section';
 
 const HomePage = () => {
   return (
-    <main className="px-4 md:px-10 lg:px-20">
+    <main className="">
       <Image
         src="/images/earth-bg.svg"
         alt="earth"
@@ -20,6 +21,7 @@ const HomePage = () => {
 
       <CrowdsourcingSection />
       <LeaderboardSection />
+      <ClientsSection />
     </main>
   );
 };
