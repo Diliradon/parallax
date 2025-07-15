@@ -20,7 +20,10 @@ export const CrowdsourcingSection = () => {
   const scale = useTransform(scrollYProgress, [0, 1], [0.7, 1.3]);
 
   return (
-    <section ref={sectionRef} className="relative mt-[100px] px-6">
+    <section
+      ref={sectionRef}
+      className="mb-30 relative mt-[100px] px-6 md:mb-[500px] lg:mb-[700px]"
+    >
       <motion.div style={{ x, y, scale }} className="absolute inset-0 z-[-1]">
         <Image
           src="/images/comet.svg"

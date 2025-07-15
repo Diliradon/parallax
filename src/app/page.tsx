@@ -4,6 +4,7 @@ import Image from 'next/image';
 
 import { CrowdsourcingSection } from 'pages/crowdsourcing-section';
 import { HeroSection } from 'pages/hero-section';
+import { LeaderboardSection } from 'pages/leaderboard-section';
 
 const HomePage = () => {
   return (
@@ -18,6 +19,7 @@ const HomePage = () => {
       <HeroSection />
 
       <CrowdsourcingSection />
+      <LeaderboardSection />
     </main>
   );
 };
