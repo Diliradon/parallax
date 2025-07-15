@@ -72,13 +72,7 @@ const generateLeaderboardData = (): LeaderboardRow[] => {
 const TrendIndicator = ({ trend }: { trend: TrendType }) => {
   if (trend === 'up') {
     return (
-      <Image
-        src="/icons/arrow-up.svg"
-        alt="arrow-up"
-        width={24}
-        height={24}
-        className="mx-auto"
-      />
+      <Image src="/icons/arrow-up.svg" alt="arrow-up" width={24} height={24} />
     );
   }
   if (trend === 'down') {
@@ -88,12 +82,11 @@ const TrendIndicator = ({ trend }: { trend: TrendType }) => {
         alt="arrow-down"
         width={24}
         height={24}
-        className="mx-auto"
       />
     );
   }
 
-  return <span className="text-lg text-gray-400">—</span>;
+  return <span className="text-gray-400">—</span>;
 };
 
 export const LeaderboardSection = () => {
@@ -101,7 +94,11 @@ export const LeaderboardSection = () => {
   const [displayedItems, setDisplayedItems] = useState(10);
   const [showViewMoreButton, setShowViewMoreButton] = useState(true);
   const [isScrollableMode, setIsScrollableMode] = useState(false);
+  const [rocketPosition, setRocketPosition] = useState(0);
+  const [isInView, setIsInView] = useState(false);
+
   const tableContainerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   const handleViewMore = () => {
     setDisplayedItems(110); // Load all 110 items
@@ -127,6 +124,39 @@ export const LeaderboardSection = () => {
     }
   }, [isScrollableMode, displayedItems, allData.length]);
 
+  // Parallax scroll effect for rocket
+  const handleParallaxScroll = useCallback(() => {
+    if (!sectionRef.current || !isInView) {
+      return;
+    }
+
+    const section = sectionRef.current;
+    const rect = section.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const sectionHeight = section.offsetHeight;
+
+    // Calculate how much of the section is visible
+    const visibleTop = Math.max(0, -rect.top);
+    const visibleBottom = Math.min(sectionHeight, windowHeight - rect.top);
+    const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const visibilityRatio = visibleHeight / windowHeight;
+
+    // Calculate rocket position based on scroll progress through section
+    const scrollProgress = Math.max(
+      0,
+      Math.min(
+        1,
+        (-rect.top + windowHeight * 0.2) / (sectionHeight + windowHeight * 0.4),
+      ),
+    );
+
+    // Move rocket from bottom (100%) to top (-20%) with parallax effect
+    const rocketY = 100 - scrollProgress * 120; // 120% range for smooth exit
+
+    setRocketPosition(rocketY);
+  }, [isInView]);
+
   useEffect(() => {
     if (isScrollableMode && tableContainerRef.current) {
       const container = tableContainerRef.current;
@@ -137,10 +167,36 @@ export const LeaderboardSection = () => {
     }
   }, [handleScroll, isScrollableMode]);
 
+  // Intersection observer for section visibility
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.1, rootMargin: '100px' },
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Parallax scroll listener
+  useEffect(() => {
+    window.addEventListener('scroll', handleParallaxScroll);
+
+    return () => window.removeEventListener('scroll', handleParallaxScroll);
+  }, [handleParallaxScroll]);
+
   const visibleData = allData.slice(0, displayedItems);
 
   return (
-    <section className="space-y-8 py-10">
+    <section
+      ref={sectionRef}
+      className="relative space-y-8 overflow-hidden py-10"
+    >
       <div className="mb-6 flex flex-col items-center justify-between gap-6 md:flex-row">
         <h2 className="text-center text-3xl font-bold text-white">
           LLM Leaderboard
@@ -242,6 +298,7 @@ export const LeaderboardSection = () => {
             type="button"
             onClick={handleViewMore}
             className="text-sm text-gray-400"
+            aria-label="Load all leaderboard items"
           >
             View More
           </button>
@@ -255,24 +312,34 @@ export const LeaderboardSection = () => {
           </div>
         </div>
       )}
-      <div className="relative z-10 flex w-fit flex-col items-center justify-center gap-[-2px]">
-        <Image
-          src="/images/space-x.png"
-          alt="space-x"
-          width={200}
-          height={200}
-          className="object-cover"
-          priority
-        />
-        <Image
-          src="/images/fire.png"
-          alt="fire"
-          width={20}
-          height={20}
-          className="object-cover"
-          priority
-        />
-      </div>
+
+      {/* Parallax Rocket */}
+      {isInView && (
+        <div
+          className="absolute left-[200px] z-10 flex w-fit flex-col items-center justify-center transition-transform duration-100 ease-out"
+          style={{
+            top: `${rocketPosition}%`,
+            transform: `translateY(-50%)`,
+          }}
+        >
+          <Image
+            src="/images/space-x.png"
+            alt="space-x"
+            width={200}
+            height={200}
+            className="object-cover"
+            priority
+          />
+          <Image
+            src="/images/fire.png"
+            alt="fire"
+            width={20}
+            height={20}
+            className="object-cover"
+            priority
+          />
+        </div>
+      )}
     </section>
   );
 };
